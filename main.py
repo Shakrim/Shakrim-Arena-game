@@ -12,13 +12,13 @@ class Dice:
         """
         The __str__ method returns text based message of dice object.
         """
-        return str(f"This is the playing dice with {self.__side_num} sides.)
+        return str(f"This is the playing dice with {self.__side_num} sides.")
 
     def __repr__(self):
         """
         The __repl__ method returns code of contructor (as string) for fucntion eval().
         """
-        return str(f"This is the playing dice with {self.__side_num} sides.)
+        return str(f"This is the playing dice with {self.__side_num} sides.")
 
     def ret_side_num(self):
         """
@@ -62,6 +62,15 @@ class Fighter:
     def is_alive(self):
         return True if self.__current_hp else False
 
+    def display_hp(self):
+        hp_meter = 10
+        hp_num = int(self.__current_hp/self.__max_hp) * hp_meter
+        if (hp_num == 0 and self.is_alive):
+            hp_num = 1
+        return (f"hp bar: {hp_num}/{hp_meter} [{hp_num * '#'}{(hp_meter-hp_num)* '-'}]")
+
+
+
 
 
 
@@ -70,3 +79,6 @@ sex_side_dice = Dice()
 print(sex_side_dice.ret_side_num())
 print(sex_side_dice.cast())
 print(sex_side_dice)
+
+pavel = Fighter("Pavel", 100, 10, 20, sex_side_dice)
+print(pavel.display_hp())
