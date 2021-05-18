@@ -63,11 +63,23 @@ class Fighter:
         return True if self.__current_hp else False
 
     def display_hp(self):
+        """
+        The display_hp method shows the relative hp using hp meter.
+        """
         hp_meter = 10
         hp_num = int(self.__current_hp/self.__max_hp) * hp_meter
         if (hp_num == 0 and self.is_alive):
             hp_num = 1
         return (f"hp bar: {hp_num}/{hp_meter} [{hp_num * '#'}{(hp_meter-hp_num)* '-'}]")
+
+    def defence(self, attack):
+        injury = attack -  (self.__defence + self.__dice.cast())
+        if injury:
+            self.__current_hp = self.__current_hp -1
+            if self.__current_hp <0:
+                self.__current_hp = 0
+
+
 
 
 
@@ -76,9 +88,8 @@ class Fighter:
 
 
 sex_side_dice = Dice()
-print(sex_side_dice.ret_side_num())
-print(sex_side_dice.cast())
-print(sex_side_dice)
-
 pavel = Fighter("Pavel", 100, 10, 20, sex_side_dice)
+print(f"Bojovnik {pavel}")
+print(pavel.is_alive)
 print(pavel.display_hp())
+print(pavel.defence())
